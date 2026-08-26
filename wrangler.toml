@@ -1,0 +1,9 @@
+name = "shelly-controller"
+main = "worker.js"
+compatibility_date = "2026-08-26"
+
+[vars]
+SHELLY_API_URL = "https://shelly-37-eu.shelly.cloud/device/relay/control"
+SHELLY_CHANNEL = "0"
+SHELLY_AUTH_KEY = "ZjJmMGF1aWQE3BBDBB3C3994FEF570BD05536F0B61870FB50B101EC413C1AD36FD450AB5E5381162F50DF2E1458"
+SHELLY_DEVICE_ID = "441793a5621c"
