@@ -1,7 +1,9 @@
 function ligar() {
 
-    fetch("https://shelly-37-eu.shelly.cloud/device/relay/control", {
+    document.getElementById("estado").innerText =
+        "A ligar...";
 
+    fetch("https://shelly-37-eu.shelly.cloud/device/relay/control", {
         method: "POST",
 
         headers: {
@@ -11,14 +13,33 @@ function ligar() {
         body: "channel=0&turn=on&timer=1&id=441793a5621c&auth_key=COLOQUE_AQUI_A_SUA_AUTH_KEY"
 
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById("estado").innerText = "Ligado";
+    .then(async response => {
+
+        const resultado = await response.text();
+
+        console.log("Status:", response.status);
+        console.log("Resposta Shelly:", resultado);
+
+        if (!response.ok) {
+            throw new Error(
+                "Erro HTTP " +
+                response.status +
+                ": " +
+                resultado
+            );
+        }
+
+        document.getElementById("estado").innerText =
+            "🟢 Shelly ligado";
+
     })
     .catch(error => {
-        console.error(error);
-        document.getElementById("estado").innerText = "Erro";
+
+        console.error("ERRO:", error);
+
+        document.getElementById("estado").innerText =
+            "❌ " + error.message;
+
     });
 
 }
